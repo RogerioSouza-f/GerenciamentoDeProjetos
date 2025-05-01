@@ -2,6 +2,8 @@ package GerenciamentoDeProjeto.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = " Clientes ")
 public class Clientes {
@@ -17,9 +19,8 @@ public class Clientes {
     @Column( unique = true, nullable = false)
     private String telefone;
 
-    @ManyToOne
-    @JoinColumn(nullable = false, name = "idProjeto")
-    private Projetos IdProjeto;
+    @OneToMany(mappedBy = "cliente")
+    private List<Projetos> projetos;
 
     public int getIdCliente() {
         return idCliente;
@@ -45,12 +46,12 @@ public class Clientes {
         this.telefone = telefone;
     }
 
-    public Projetos getIdProjeto() {
-        return IdProjeto;
+    public List<Projetos> getProjetos() {
+        return projetos;
     }
 
-    public void setIdProjeto(Projetos idProjeto) {
-        IdProjeto = idProjeto;
+    public void setProjetos(List<Projetos> projetos) {
+        this.projetos = projetos;
     }
 }
 

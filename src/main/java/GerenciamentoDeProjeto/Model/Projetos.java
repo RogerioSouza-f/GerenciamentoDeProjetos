@@ -4,6 +4,7 @@ package GerenciamentoDeProjeto.Model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Projetos")
@@ -30,11 +31,22 @@ public class Projetos {
     @Column (nullable = false, columnDefinition = "DATE")
     private LocalDate dataFim;
 
+    @ManyToOne
+    @JoinColumn (nullable = false, name = "idCliente")
+    private Clientes cliente;
+
+    @ManyToOne
+    @JoinColumn (nullable = false, name = "idEquipe")
+    private Equipe equipe;
+
+    @OneToMany (mappedBy = "projeto")
+    private List <Tarefas> tarefa;
+
     public long getIdProjeto() {
         return idProjeto;
     }
 
-    public void setIdProjeto(int idProjeto) {
+    public void setIdProjeto(long idProjeto) {
         this.idProjeto = idProjeto;
     }
 
@@ -77,5 +89,28 @@ public class Projetos {
     public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
-}
 
+    public Clientes getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Clientes cliente) {
+        this.cliente = cliente;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+
+    public List<Tarefas> getTarefas() {
+        return tarefa;
+    }
+
+    public void setTarefas(List<Tarefas> tarefa) {
+        this.tarefa = tarefa;
+    }
+}

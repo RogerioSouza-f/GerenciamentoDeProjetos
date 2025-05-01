@@ -2,13 +2,15 @@ package GerenciamentoDeProjeto.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = "Usuarios")
-public class Usuarios {
+@Table(name = "Membros")
+public class Membros {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idUsuario;
+    private long idMembro;
 
     @Column(nullable = false)
     private String nome;
@@ -19,15 +21,21 @@ public class Usuarios {
     @Column(nullable = false)
     private String formacao;
 
-    @JoinColumn(nullable = false)
-    private String idTarefas;
+    @ManyToMany
+    @JoinTable(name = "Membros-Tarefas")
+    private List<Tarefas> tarefa;
 
-    public long getIdUsuario() {
-        return idUsuario;
+
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "idEquipe")
+    private Equipe idEquipe;
+
+    public long getIdMembro() {
+        return idMembro;
     }
 
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdMembro(long idMembro) {
+        this.idMembro = idMembro;
     }
 
     public String getNome() {
@@ -54,11 +62,11 @@ public class Usuarios {
         this.formacao = formacao;
     }
 
-    public String getIdTarefas() {
-        return idTarefas;
+    public List<Tarefas> getTarefa() {
+        return tarefa;
     }
 
-    public void setIdTarefas(String idTarefas) {
-        this.idTarefas = idTarefas;
+    public void setTarefa(List<Tarefas> tarefa) {
+        this.tarefa = tarefa;
     }
 }

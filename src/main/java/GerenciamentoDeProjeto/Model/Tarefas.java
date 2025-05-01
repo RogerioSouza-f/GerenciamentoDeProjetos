@@ -18,7 +18,7 @@ public class Tarefas {
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "idProjeto")
-    private Projetos IdProjeto;
+    private Projetos projeto;
 
     public int getIdTarefas() {
         return idTarefas;
@@ -44,12 +44,12 @@ public class Tarefas {
         this.descricao = descricao;
     }
 
-    public Projetos getIdProjeto() {
-        return IdProjeto;
+    public Projetos getProjeto() {
+        return projeto;
     }
 
-    public void setIdProjeto(Projetos idProjeto) {
-        IdProjeto = idProjeto;
+    public void setProjeto(Projetos projeto) {
+        this.projeto = projeto;
     }
 }
 
