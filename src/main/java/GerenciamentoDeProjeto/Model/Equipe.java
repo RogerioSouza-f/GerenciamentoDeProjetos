@@ -18,7 +18,7 @@ public class Equipe {
     @Column(nullable = false)
     private String descricaoEquipe;
 
-    @OneToMany(mappedBy = "equipe")
+    @OneToMany(mappedBy = "idEquipe")
     private List<Membros> membros;
 
     public long getIdEquipe() {
