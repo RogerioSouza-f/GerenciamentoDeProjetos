@@ -9,13 +9,13 @@
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/gerenciamentoprojeto"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="Sba04$$@#"/>
+            <property name="jakarta.persistence.jdbc.password" value="admin"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
 
     </persistence-unit>
