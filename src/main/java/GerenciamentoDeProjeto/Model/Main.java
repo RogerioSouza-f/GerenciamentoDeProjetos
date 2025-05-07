@@ -1,4 +1,5 @@
-import GerenciamentoDeProjeto.Model.Tarefas;
+package GerenciamentoDeProjeto.Model;
+
 import Persistence.Manager.PersistenceManager;
 import jakarta.persistence.EntityManager;
 
