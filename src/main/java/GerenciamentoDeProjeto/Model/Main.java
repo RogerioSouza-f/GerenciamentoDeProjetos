@@ -13,33 +13,33 @@ public class Main {
         try {
 
 
-            // Criando o cliente
-            Clientes cliente = new Clientes();
-            cliente.setNome("João");
-            cliente.setTelefone("11111111111");
+//            // Criando o cliente
+//            Clientes cliente = new Clientes();
+//            cliente.setNome("Deus");
+//            cliente.setTelefone("8399999999");
 
-            // Salvando no banco
-            clientesDao.criarCliente(cliente);
-            System.out.println("Cliente salvo com sucesso!");
+//            // Salvando no banco
+//            clientesDao.criarCliente(cliente);
+//            System.out.println("Cliente salvo com sucesso!");
 
-            // Buscando o cliente
-            Clientes clienteBuscado1 = clientesDao.buscarporId(1);
-            System.out.println("Cliente encontrado: " + clienteBuscado1.getNome());
+//            // Buscando o cliente
+//            Clientes clienteBuscado1 = clientesDao.buscarporId(7);
+//            System.out.println("Cliente encontrado: " + clienteBuscado1.getNome());
 
-            Clientes clienteBuscado2 = clientesDao.buscarporId(2);
-            System.out.println("Cliente encontrado: " + clienteBuscado2.getNome());
+//            Clientes clienteBuscado2 = clientesDao.buscarporId(2);
+//            System.out.println("Cliente encontrado: " + clienteBuscado2.getNome());
 
 
             //Só trocar pelo id no final
-//            Clientes clienteParaDeletar = clientesDao.buscarporId(1);
-//
-//            if (clienteParaDeletar != null) {
-//                // Deletar o cliente encontrado
-//                clientesDao.deletetarCliente(clienteParaDeletar.getIdCliente());
-//                System.out.println("Cliente " + clienteParaDeletar.getNome() + " deletado com sucesso!");
-//            } else {
-//                System.out.println("Cliente não encontrado!");
-//            }
+            Clientes clienteParaDeletar = clientesDao.buscarporId(7);
+
+            if (clienteParaDeletar != null) {
+                // Deletar o cliente encontrado
+                clientesDao.deletetarCliente(clienteParaDeletar.getIdCliente());
+                System.out.println("Cliente " + clienteParaDeletar.getNome() + " deletado com sucesso!");
+            } else {
+                System.out.println("Cliente não encontrado!");
+            }
 
 
 
