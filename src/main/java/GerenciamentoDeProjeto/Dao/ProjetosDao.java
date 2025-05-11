@@ -1,6 +1,7 @@
 package GerenciamentoDeProjeto.Dao;
 
 import GerenciamentoDeProjeto.Model.Projetos;
+import Persistence.Manager.PersistenceManager;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
@@ -15,38 +16,42 @@ public class ProjetosDao {
     }
 
     public void criarProjeto(Projetos projeto) {
-        EntityTransaction transaction = entityManager.getTransaction();
         try {
-            transaction.begin();
+            entityManager.getTransaction().begin();
             entityManager.persist(projeto);
-            transaction.commit();
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
             }
             throw e;
         }
     }
 
-    public Projetos buscarProjetoPorId(int id) {
+
+    public Projetos buscarProjetoPorId(long id) {
         return entityManager.find(Projetos.class, id);
     }
 
-    public void atualizarProjeto(Projetos projeto) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            entityManager.merge(projeto);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        }
+    public List<Projetos> buscarTodosProjetos() {
+        TypedQuery<Projetos> query = entityManager.createQuery("SELECT p FROM Projetos p", Projetos.class);
+        return query.getResultList();
     }
 
-    public void deletarProjeto(int id) {
+    public void atualizarProjeto(Projetos projeto) {
+    try {
+        entityManager.getTransaction().begin();
+        entityManager.merge(projeto);
+        entityManager.getTransaction().commit();
+    } catch (Exception e) {
+        if (entityManager.getTransaction().isActive()) {
+            entityManager.getTransaction().rollback();
+        }
+        throw e;
+    }
+}
+
+    public void deletarProjeto(long id) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -63,8 +68,18 @@ public class ProjetosDao {
         }
     }
 
-    public List<Projetos> buscarTodosProjetos() {
-        TypedQuery<Projetos> query = entityManager.createQuery("SELECT p FROM Projetos p", Projetos.class);
-        return query.getResultList();
+    public List<Projetos> buscarProjetosDoCliente(long idCliente) {
+        try {
+            TypedQuery<Projetos> query = entityManager.createQuery(
+                    "SELECT p FROM Projetos p WHERE p.cliente.idCliente = :idCliente",
+                    Projetos.class);
+            query.setParameter("idCliente", idCliente);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
+
+
 }

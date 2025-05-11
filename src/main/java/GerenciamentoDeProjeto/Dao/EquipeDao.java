@@ -1,9 +1,12 @@
 package GerenciamentoDeProjeto.Dao;
 
 import GerenciamentoDeProjeto.Model.Equipe;
+import Persistence.Manager.PersistenceManager;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class EquipeDao {

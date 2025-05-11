@@ -1,9 +1,6 @@
 package GerenciamentoDeProjeto.Model;
 
-
 import jakarta.persistence.*;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -12,41 +9,35 @@ public class Projetos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idProjeto;
+    private Long idProjeto;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String nome;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String descricao;
 
-    @Column (nullable = false)
-    private String categoria;
+    @Column(nullable = false)
+    private String status = "Aguardando Equipe";
 
-
-    @Column (nullable = false, columnDefinition = "DATE")
-    private LocalDate dataInicio;
-
-
-    @Column (nullable = false, columnDefinition = "DATE")
-    private LocalDate dataFim;
 
     @ManyToOne
-    @JoinColumn (nullable = false, name = "idCliente")
+    @JoinColumn(name = "idCliente", nullable = false)
     private Clientes cliente;
 
     @ManyToOne
-    @JoinColumn (nullable = false, name = "idEquipe")
+    @JoinColumn(name = "idEquipe", nullable = true)
     private Equipe equipe;
 
-    @OneToMany (mappedBy = "projeto")
-    private List <Tarefas> tarefa;
+    @OneToMany(mappedBy = "projeto")
+    private List<Tarefas> tarefas;
 
+    // Getters e Setters
     public long getIdProjeto() {
         return idProjeto;
     }
 
-    public void setIdProjeto(long idProjeto) {
+    public void setIdProjeto(Long idProjeto) {
         this.idProjeto = idProjeto;
     }
 
@@ -66,30 +57,6 @@ public class Projetos {
         this.descricao = descricao;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public LocalDate getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(LocalDate dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public LocalDate getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(LocalDate dataFim) {
-        this.dataFim = dataFim;
-    }
-
     public Clientes getCliente() {
         return cliente;
     }
@@ -98,21 +65,24 @@ public class Projetos {
         this.cliente = cliente;
     }
 
-    public Equipe getEquipe() {
-        return equipe;
+    public String getStatus() {
+        return status;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<Tarefas> getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(List<Tarefas> tarefas) {
+        this.tarefas = tarefas;
+    }
+    public Equipe getEquipe() {return equipe;}
 
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
     }
-
-    public List<Tarefas> getTarefas() {
-        return tarefa;
-    }
-
-    public void setTarefas(List<Tarefas> tarefa) {
-        this.tarefa = tarefa;
-    }
-
-
 }

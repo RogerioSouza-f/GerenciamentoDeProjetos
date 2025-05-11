@@ -2,12 +2,9 @@ package GerenciamentoDeProjeto.Dao;
 
 import GerenciamentoDeProjeto.Model.Tarefas;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class TarefasDao {
-
     private EntityManager entityManager;
 
     public TarefasDao(EntityManager entityManager) {
@@ -15,56 +12,64 @@ public class TarefasDao {
     }
 
     public void criarTarefa(Tarefas tarefa) {
-        EntityTransaction transaction = entityManager.getTransaction();
         try {
-            transaction.begin();
+            entityManager.getTransaction().begin();
             entityManager.persist(tarefa);
-            transaction.commit();
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
             }
             throw e;
         }
     }
 
-    public Tarefas buscarTarefaPorId(int id) {
+    public List<Tarefas> buscarTodasTarefas(Long idProjeto) {
+        return entityManager.createQuery(
+            "SELECT t FROM Tarefas t WHERE t.projeto.idProjeto = :idProjeto",
+            Tarefas.class)
+            .setParameter("idProjeto", idProjeto)
+            .getResultList();
+    }
+
+    public List<Tarefas> buscarTarefasDaEquipe(Long idEquipe) {
+        return entityManager.createQuery(
+            "SELECT t FROM Tarefas t WHERE t.projeto.equipe.idEquipe = :idEquipe",
+            Tarefas.class)
+            .setParameter("idEquipe", idEquipe)
+            .getResultList();
+    }
+
+    public Tarefas buscarTarefaPorId(Long id) {
         return entityManager.find(Tarefas.class, id);
     }
 
     public void atualizarTarefa(Tarefas tarefa) {
-        EntityTransaction transaction = entityManager.getTransaction();
         try {
-            transaction.begin();
+            entityManager.getTransaction().begin();
             entityManager.merge(tarefa);
-            transaction.commit();
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
             }
             throw e;
         }
     }
 
-    public void deletarTarefa(int id) {
-        EntityTransaction transaction = entityManager.getTransaction();
+    public void deletarTarefa(Long id) {
         try {
-            transaction.begin();
+            entityManager.getTransaction().begin();
             Tarefas tarefa = entityManager.find(Tarefas.class, id);
             if (tarefa != null) {
                 entityManager.remove(tarefa);
             }
-            transaction.commit();
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
             }
             throw e;
         }
-    }
-
-    public List<Tarefas> buscarTodasTarefas() {
-        TypedQuery<Tarefas> query = entityManager.createQuery("SELECT t FROM Tarefas t", Tarefas.class);
-        return query.getResultList();
     }
 }

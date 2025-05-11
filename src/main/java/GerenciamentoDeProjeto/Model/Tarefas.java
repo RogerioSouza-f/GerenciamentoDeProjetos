@@ -2,8 +2,10 @@ package GerenciamentoDeProjeto.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = " Tarefas")
+@Table(name = "Tarefas")
 public class Tarefas {
 
     @Id
@@ -16,9 +18,29 @@ public class Tarefas {
     @Column
     private String descricao;
 
+    @Column(nullable = false)
+    private String status = "Pendente";
+
+    @ManyToOne
+    @JoinColumn(name = "id_equipe")
+    private Equipe equipe;
+
+
     @ManyToOne
     @JoinColumn(nullable = false, name = "idProjeto")
     private Projetos projeto;
+
+    @ManyToMany
+    @JoinTable(name = "Tarefa_Membro")
+    private List<Membros> membros;
+
+    public List<Membros> getMembros() {
+        return membros;
+    }
+
+    public void setMembros(List<Membros> membros) {
+        this.membros = membros;
+    }
 
     public int getIdTarefas() {
         return idTarefas;
@@ -51,5 +73,13 @@ public class Tarefas {
     public void setProjeto(Projetos projeto) {
         this.projeto = projeto;
     }
-}
 
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) { this.status = status;}
+
+    public Equipe getEquipe() {return equipe;}
+
+    public void setEquipe(Equipe equipe) {this.equipe = equipe;}
+
+}

@@ -52,4 +52,6 @@ public class Equipe {
     public void setMembros(List<Membros> membros) {
         this.membros = membros;
     }
+
+
 }
