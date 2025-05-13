@@ -21,6 +21,7 @@ public class TelaGerenciamentoEquipe extends JFrame {
         
         // Painel principal
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
         // Cabeçalho com nome da equipe
