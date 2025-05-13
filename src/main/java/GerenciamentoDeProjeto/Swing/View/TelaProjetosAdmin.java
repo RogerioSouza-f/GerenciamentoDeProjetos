@@ -23,6 +23,8 @@ public class TelaProjetosAdmin extends JFrame {
 
         // Painel principal
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+
+        mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Painel esquerdo com lista de projetos
