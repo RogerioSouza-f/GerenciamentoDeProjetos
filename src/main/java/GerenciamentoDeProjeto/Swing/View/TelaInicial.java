@@ -18,7 +18,7 @@ public class TelaInicial extends JFrame {
 
         // Painel principal
         JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setBackground(new Color(150, 150, 150)); // Cinza médio
+        mainPanel.setBackground(new Color(220, 220, 220)); // Cinza médio
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
