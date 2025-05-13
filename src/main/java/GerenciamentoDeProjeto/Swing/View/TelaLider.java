@@ -13,9 +13,16 @@ public class TelaLider extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        // Painel principal com BorderLayout
-        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+//        // Painel principal com BorderLayout
+//        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+//        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Painel principal
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(new Color(0, 0, 0)); // Cinza claro
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         
         // Título
         JLabel lblTitulo = new JLabel("Selecione uma Equipe");

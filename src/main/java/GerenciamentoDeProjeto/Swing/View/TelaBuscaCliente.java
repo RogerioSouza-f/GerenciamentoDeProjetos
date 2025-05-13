@@ -15,8 +15,15 @@ public class TelaBuscaCliente extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+//        // Painel principal
+//        JPanel mainPanel = new JPanel(new GridBagLayout());
+//        GridBagConstraints gbc = new GridBagConstraints();
+//        gbc.insets = new Insets(5, 5, 5, 5);
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+
         // Painel principal
         JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(new Color(0, 0, 0)); // Cinza claro
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;

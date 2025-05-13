@@ -25,27 +25,31 @@ public class TelaCliente extends JFrame {
         setLocationRelativeTo(null);
 
         // Painel principal
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(new Color(0, 0, 0)); // Cinza claro
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Painel de formulário
         JPanel formPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+        GridBagConstraints gbcc = new GridBagConstraints();
+        gbcc.insets = new Insets(5, 5, 5, 5);
 
         // Campos de texto
-        gbc.gridx = 0; gbc.gridy = 0;
-        formPanel.add(new JLabel("Nome:"), gbc);
+        gbcc.gridx = 0; gbcc.gridy = 0;
+        formPanel.add(new JLabel("Nome:"), gbcc);
 
-        gbc.gridx = 1; gbc.gridy = 0;
+        gbcc.gridx = 1; gbcc.gridy = 0;
         txtNome = new JTextField(30);
-        formPanel.add(txtNome, gbc);
+        formPanel.add(txtNome, gbcc);
 
-        gbc.gridx = 0; gbc.gridy = 1;
-        formPanel.add(new JLabel("Descrição:"), gbc);
+        gbcc.gridx = 0; gbcc.gridy = 1;
+        formPanel.add(new JLabel("Descrição:"), gbcc);
 
-        gbc.gridx = 1; gbc.gridy = 1;
+        gbcc.gridx = 1; gbcc.gridy = 1;
         txtDescricao = new JTextField(30);
-        formPanel.add(txtDescricao, gbc);
+        formPanel.add(txtDescricao, gbcc);
 
         // Painel de botões
         JPanel buttonPanel = new JPanel(new FlowLayout());

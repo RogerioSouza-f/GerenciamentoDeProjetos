@@ -2,6 +2,7 @@ package GerenciamentoDeProjeto.Swing.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
 
 public class TelaCadastroCliente extends JFrame {
     private JTextField txtNome;
@@ -15,13 +16,28 @@ public class TelaCadastroCliente extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+
+        // Painel com imagem de fundo
+        ImageIcon imagemIcon = new ImageIcon("src/main/resources/img.jpg");//aqui <-
+        Image imagem = imagemIcon.getImage();
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imagem, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        backgroundPanel.setLayout(new BorderLayout());
+
         // Painel principal
         JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(new Color(150, 150, 150)); // Cinza claro
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Campo Nome
+
         gbc.gridx = 0;
         gbc.gridy = 0;
         mainPanel.add(new JLabel("Nome:"), gbc);
@@ -49,10 +65,18 @@ public class TelaCadastroCliente extends JFrame {
         buttonPanel.add(btnSalvar);
         buttonPanel.add(btnCancelar);
 
-        // Adiciona os painéis à janela
-        setLayout(new BorderLayout());
-        add(mainPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+//        // Adiciona os painéis à janela
+//        setLayout(new BorderLayout());
+//        add(mainPanel, BorderLayout.CENTER);
+//        add(buttonPanel, BorderLayout.SOUTH);
+
+        // Adiciona os painéis ao backgroundPanel
+        backgroundPanel.add(mainPanel, BorderLayout.CENTER);
+        backgroundPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Adiciona o backgroundPanel à janela
+        add(backgroundPanel);
+
     }
 
     // Getters

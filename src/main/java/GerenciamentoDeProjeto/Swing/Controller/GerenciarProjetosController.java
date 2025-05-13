@@ -40,6 +40,7 @@ public class GerenciarProjetosController {
 
     // Configura os ouvintes dos botões
     private void inicializarOuvintes() {
+//        view.getBtnNovo().addActionListener(e -> );
         view.getBtnVoltar().addActionListener(e -> voltar());
         view.getBtnEditar().addActionListener(e -> editarProjeto());
         view.getBtnExcluir().addActionListener(e -> excluirProjeto());
