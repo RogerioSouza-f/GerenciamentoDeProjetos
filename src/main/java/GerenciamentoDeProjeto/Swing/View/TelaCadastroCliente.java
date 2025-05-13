@@ -17,21 +17,9 @@ public class TelaCadastroCliente extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 
-        // Painel com imagem de fundo
-        ImageIcon imagemIcon = new ImageIcon("src/main/resources/img.jpg");//aqui <-
-        Image imagem = imagemIcon.getImage();
-        JPanel backgroundPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(imagem, 0, 0, getWidth(), getHeight(), this);
-            }
-        };
-        backgroundPanel.setLayout(new BorderLayout());
-
         // Painel principal
         JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setBackground(new Color(150, 150, 150)); // Cinza claro
+        mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
