@@ -26,7 +26,7 @@ public class TelaCliente extends JFrame {
 
         // Painel principal
         JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setBackground(new Color(0, 0, 0)); // Cinza claro
+        mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
