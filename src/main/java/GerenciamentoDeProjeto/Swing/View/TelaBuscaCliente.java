@@ -15,15 +15,9 @@ public class TelaBuscaCliente extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-//        // Painel principal
-//        JPanel mainPanel = new JPanel(new GridBagLayout());
-//        GridBagConstraints gbc = new GridBagConstraints();
-//        gbc.insets = new Insets(5, 5, 5, 5);
-//        gbc.fill = GridBagConstraints.HORIZONTAL;
-
         // Painel principal
         JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro
+        mainPanel.setBackground(new Color(220, 220, 220));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -54,7 +48,7 @@ public class TelaBuscaCliente extends JFrame {
         gbc.gridy = 2;
         gbc.gridwidth = 2;
         JLabel infoLabel = new JLabel("Preencha pelo menos um dos campos para buscar");
-        infoLabel.setForeground(Color.GRAY);
+        infoLabel.setForeground(Color.BLACK);
         mainPanel.add(infoLabel, gbc);
 
         // Painel de botões

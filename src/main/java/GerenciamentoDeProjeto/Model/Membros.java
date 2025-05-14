@@ -20,13 +20,6 @@ public class Membros {
     @Column(nullable = false)
     private String formacao;
 
-//    @Column(nullable = false)
-//    private NivelSenioridade nivel_senioridade;
-
-    @ManyToMany
-    @JoinTable(name = "Membros-Tarefas")
-    private List<Tarefas> tarefa;
-
     @ManyToOne
     @JoinColumn(nullable = false, name = "idEquipe")
     private Equipe idEquipe;
@@ -63,19 +56,10 @@ public class Membros {
         this.formacao = formacao;
     }
 
-    public List<Tarefas> getTarefa() {
-        return tarefa;
-    }
-
-    public void setTarefa(List<Tarefas> tarefa) {
-        this.tarefa = tarefa;
-    }
-
     public void setIdEquipe(Equipe equipe) {
     }
-    public Equipe getIdEquipe() {return idEquipe;}
 
-//    public void setNivel_senioridade(NivelSenioridade nivel_senioridade) {
-//        this.nivel_senioridade = nivel_senioridade;
-//    }
+    public Equipe getIdEquipe() {
+        return idEquipe;
+    }
 }

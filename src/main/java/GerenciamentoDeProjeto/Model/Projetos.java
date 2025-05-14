@@ -18,11 +18,10 @@ public class Projetos {
     private String descricao;
 
     @Column(nullable = false)
-    private String status = "Aguardando Equipe";
-
+    private String status = "Aguardando";
 
     @ManyToOne
-    @JoinColumn(name = "idCliente", nullable = false)
+    @JoinColumn(name = "idCliente", nullable = false) // o JPA cria uma coluna de junção na tabela
     private Clientes cliente;
 
     @ManyToOne
@@ -35,10 +34,6 @@ public class Projetos {
     // Getters e Setters
     public long getIdProjeto() {
         return idProjeto;
-    }
-
-    public void setIdProjeto(Long idProjeto) {
-        this.idProjeto = idProjeto;
     }
 
     public String getNome() {

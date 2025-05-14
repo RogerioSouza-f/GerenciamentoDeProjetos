@@ -23,6 +23,8 @@ public class TelaGerenciamentoEquipe extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBackground(new Color(220, 220, 220));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
         // Cabeçalho com nome da equipe
         lblEquipe = new JLabel("Equipe: " + equipe.getNomeEquipe());
@@ -97,4 +99,5 @@ public class TelaGerenciamentoEquipe extends JFrame {
     public JComboBox<String> getComboStatus() {
         return comboStatus;
     }
+
 }

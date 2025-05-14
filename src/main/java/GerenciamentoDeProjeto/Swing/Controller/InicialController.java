@@ -23,21 +23,14 @@ public class InicialController {
     }
 
     private void inicializarOuvintes() {
-        // Ouvinte para Novo Cliente
         view.getBtnNovoCliente().addActionListener(e -> abrirTelaCadastroCliente());
-        
-        // Ouvinte para Cliente Existente
         view.getBtnClienteExistente().addActionListener(e -> abrirTelaBuscaCliente());
-        
-        // Ouvintes
         view.getBtnAdmin().addActionListener(e -> {
             TelaMenuAdministrador telaAdmin = new TelaMenuAdministrador();
             MenuAdministradorController controllerAdmin = new MenuAdministradorController(telaAdmin);
             telaAdmin.setVisible(true);
             view.dispose();
         });
-
-
         view.getBtnLider().addActionListener(e -> {
             TelaLider telaLider = new TelaLider();
             LiderController controller = new LiderController(telaLider); // Adicione esta linha

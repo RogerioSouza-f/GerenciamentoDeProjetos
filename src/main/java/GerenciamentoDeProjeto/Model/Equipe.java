@@ -24,22 +24,11 @@ public class Equipe {
     public long getIdEquipe() {
         return idEquipe;
     }
-
-    public void setIdEquipe(long idEquipe) {
-        this.idEquipe = idEquipe;
-    }
-
     public String getNomeEquipe() {
         return nomeEquipe;
     }
 
-    public void setNomeEquipe(String nomeEquipe) {
-        this.nomeEquipe = nomeEquipe;
-    }
 
-    public String getDescricaoEquipe() {
-        return descricaoEquipe;
-    }
 
     public void setDescricaoEquipe(String descricaoEquipe) {
         this.descricaoEquipe = descricaoEquipe;

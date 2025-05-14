@@ -45,7 +45,7 @@ public class ClientesDao {
         }
     }
 
-    public void deletetarCliente(long id) {
+    public void deletarCliente(long id) {
         try {
             entityManager.getTransaction().begin();
             Clientes cliente = entityManager.find(Clientes.class, id);

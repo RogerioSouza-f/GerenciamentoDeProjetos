@@ -37,7 +37,7 @@ public class CadastroClienteController {
             cliente.setTelefone(telefone);
 
             clientesDao.criarCliente(cliente);
-            clienteSalvo = true; // Marca que o cliente foi salvo com sucesso
+            clienteSalvo = true;
             JOptionPane.showMessageDialog(view, "Cliente cadastrado com sucesso!");
             view.dispose();
         } catch (Exception e) {

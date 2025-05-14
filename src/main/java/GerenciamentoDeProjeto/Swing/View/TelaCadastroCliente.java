@@ -10,6 +10,7 @@ public class TelaCadastroCliente extends JFrame {
     private JButton btnSalvar;
     private JButton btnCancelar;
 
+
     public TelaCadastroCliente() {
         setTitle("Cadastro de Cliente");
         setSize(400, 200);

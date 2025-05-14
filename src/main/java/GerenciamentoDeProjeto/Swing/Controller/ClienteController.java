@@ -22,13 +22,9 @@ public class ClienteController {
     private Clientes clienteAtual;
     private TelaInicial telaAnterior;
 
-
-
-
     public ClienteController(TelaCliente view, ClientesDao clientesDao, ProjetosDao projetosDao,Clientes cliente, TelaInicial telaAnterior) {
         this.view = view;
         this.projetosDao = projetosDao;
-        this.clientesDao = clientesDao;
         this.clienteAtual = cliente;
         this.telaAnterior = telaAnterior;
 
@@ -43,10 +39,7 @@ public class ClienteController {
         view.getBtnVoltar().addActionListener(e -> voltar());
     }
 
-    private void voltar() {
-        view.dispose();
-        telaAnterior.setVisible(true);
-    }
+
 
     private void atualizarListaProjetos() {
         try {
@@ -89,12 +82,11 @@ public class ClienteController {
             projeto.setNome(nome);
             projeto.setDescricao(descricao);
             projeto.setCliente(clienteAtual);
-            projeto.setStatus("Aguardando Equipe");
+            projeto.setStatus("Aguardando");
 
             projetosDao.criarProjeto(projeto);
             atualizarListaProjetos();
-            JOptionPane.showMessageDialog(view,
-                    "Projeto salvo com sucesso!");
+            JOptionPane.showMessageDialog(view, "Projeto salvo com sucesso!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(view, "Erro ao salvar projeto: " + e.getMessage());
             e.printStackTrace();
@@ -154,6 +146,10 @@ public class ClienteController {
             JOptionPane.showMessageDialog(view, "Erro ao excluir projeto: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+    private void voltar() {
+        view.dispose();
+        telaAnterior.setVisible(true);
     }
 
 }

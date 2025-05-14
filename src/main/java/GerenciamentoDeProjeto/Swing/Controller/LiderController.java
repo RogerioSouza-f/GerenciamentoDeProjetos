@@ -43,7 +43,6 @@ public class LiderController {
     }
     
     private void abrirGerenciamentoEquipe(Equipe equipe) {
-        // Aqui você pode criar uma nova tela para gerenciar as tarefas específicas da equipe
         TelaGerenciamentoEquipe telaGerenciamento = new TelaGerenciamentoEquipe(equipe);
         GerenciamentoEquipeController controller = new GerenciamentoEquipeController(telaGerenciamento, equipe);
         telaGerenciamento.setVisible(true);

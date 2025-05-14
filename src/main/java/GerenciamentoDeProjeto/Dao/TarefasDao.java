@@ -34,7 +34,7 @@ public class TarefasDao {
 
     public List<Tarefas> buscarTarefasDaEquipe(Long idEquipe) {
         return entityManager.createQuery(
-            "SELECT t FROM Tarefas t WHERE t.projeto.equipe.idEquipe = :idEquipe",
+            "SELECT t FROM Tarefas t WHERE t.equipe.idEquipe = :idEquipe",
             Tarefas.class)
             .setParameter("idEquipe", idEquipe)
             .getResultList();
@@ -69,7 +69,7 @@ public class TarefasDao {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-            throw e;
+            throw new RuntimeException("Erro ao excluir tarefa: " + e.getMessage(), e);
         }
     }
 }

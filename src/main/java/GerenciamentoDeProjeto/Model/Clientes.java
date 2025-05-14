@@ -7,6 +7,8 @@ import java.util.List;
 @Entity
 @Table(name = "clientes")
 public class Clientes {
+
+    //gerada automaticamente pelo banco de dados
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
@@ -25,10 +27,6 @@ public class Clientes {
     public Long getIdCliente() {
         return idCliente;
     }
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
-
 
     public String getNome() {
         return nome;

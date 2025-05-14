@@ -8,11 +8,10 @@ import GerenciamentoDeProjeto.Dao.TarefasDao;
 import GerenciamentoDeProjeto.Swing.View.TelaGerenciarProjetos;
 import GerenciamentoDeProjeto.Swing.View.TelaMenuAdministrador;
 import Persistence.Manager.PersistenceManager;
-import GerenciamentoDeProjeto.Model.Membros;
 import GerenciamentoDeProjeto.Model.Tarefas;
 
 import java.awt.*;
-import java.util.ArrayList;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -47,7 +46,7 @@ public class GerenciarProjetosController {
         view.getBtnGerenciarTarefas().addActionListener(e -> gerenciarTarefas());
     }
 
-    // Interface para gerenciar tarefas do projeto
+    
     private void gerenciarTarefas() {
         int linhaSelecionada = view.getTabelaProjetos().getSelectedRow();
         if (linhaSelecionada == -1) {
@@ -83,7 +82,8 @@ public class GerenciarProjetosController {
 
             // Preenche a lista de tarefas
             for (Tarefas tarefa : tarefasProjeto) {
-                modeloLista.addElement(String.format("Tarefa: %s - Status: %s - Equipe: %s",
+                modeloLista.addElement(String.format("[ID: %d] Tarefa: %s - Status: %s - Equipe: %s",
+                    tarefa.getIdTarefas(),
                     tarefa.getNome(),
                     tarefa.getStatus(),
                     projeto.getEquipe().getNomeEquipe()));
@@ -92,20 +92,26 @@ public class GerenciarProjetosController {
             // Painel de botões
             JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
             JButton btnNovaTarefa = new JButton("Nova Tarefa");
+            JButton btnExcluirTarefa = new JButton("Excluir Tarefa");
+
             btnNovaTarefa.addActionListener(e -> {
                 adicionarTarefa(projeto, modeloLista);
-                // Atualiza a lista após adicionar
-                tarefasProjeto.clear();
-                tarefasProjeto.addAll(tarefasDao.buscarTodasTarefas(idProjeto));
+                atualizarListaTarefas(idProjeto, modeloLista);
             });
+
+            btnExcluirTarefa.addActionListener(e -> {
+                deletarTarefa(listaTarefas, idProjeto, modeloLista);
+            });
+
             painelBotoes.add(btnNovaTarefa);
+            painelBotoes.add(btnExcluirTarefa);
 
             dialogTarefas.add(new JScrollPane(listaTarefas), BorderLayout.CENTER);
             dialogTarefas.add(painelBotoes, BorderLayout.SOUTH);
 
             dialogTarefas.setVisible(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(view, 
+            JOptionPane.showMessageDialog(view,
                 "Erro ao gerenciar tarefas: " + e.getMessage(),
                 "Erro",
                 JOptionPane.ERROR_MESSAGE);
@@ -113,72 +119,74 @@ public class GerenciarProjetosController {
         }
     }
 
-    // Atribui membros da equipe a uma tarefa
-    private void atribuirMembrosATarefa(Tarefas tarefa, Equipe equipe) {
-        if (equipe == null || tarefa == null) {
-            JOptionPane.showMessageDialog(view, "Erro: Equipe ou tarefa inválida.");
-            return;
-        }
-
-        List<Membros> membrosEquipe = equipe.getMembros();
-        if (membrosEquipe == null || membrosEquipe.isEmpty()) {
-            JOptionPane.showMessageDialog(view, "Esta equipe não possui membros.");
-            return;
-        }
-
-        JDialog dialogMembros = new JDialog(view, "Selecionar Membros", true);
-        dialogMembros.setLayout(new BorderLayout());
-        dialogMembros.setSize(400, 300);
-        dialogMembros.setLocationRelativeTo(view);
-
-        DefaultListModel<String> modeloMembros = new DefaultListModel<>();
-        JList<String> listaMembros = new JList<>(modeloMembros);
-        listaMembros.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-        for (Membros membro : membrosEquipe) {
-            modeloMembros.addElement(membro.getNome());
-        }
-
-        JButton btnConfirmar = new JButton("Confirmar Seleção");
-        btnConfirmar.addActionListener(e -> {
-            List<String> membrosSelecionados = listaMembros.getSelectedValuesList();
-            if (!membrosSelecionados.isEmpty()) {
-                List<Membros> membrosAtribuidos = new ArrayList<>();
-                for (String nomeMembro : membrosSelecionados) {
-                    membrosEquipe.stream()
-                        .filter(membro -> membro.getNome().equals(nomeMembro))
-                        .findFirst()
-                        .ifPresent(membrosAtribuidos::add);
-                }
-                tarefa.setMembros(membrosAtribuidos);
-                
-                try {
-                    tarefasDao.atualizarTarefa(tarefa);
-                    JOptionPane.showMessageDialog(dialogMembros, "Membros atribuídos com sucesso!");
-                    dialogMembros.dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(dialogMembros, 
-                        "Erro ao atribuir membros: " + ex.getMessage(),
-                        "Erro",
-                        JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(dialogMembros, "Selecione pelo menos um membro.");
+    //Métodos para atualizar a lista de tarefas
+    private void atualizarListaTarefas(Long idProjeto, DefaultListModel<String> modeloLista) {
+        try {
+            List<Tarefas> tarefasAtualizadas = tarefasDao.buscarTodasTarefas(idProjeto);
+            modeloLista.clear();
+            for (Tarefas tarefa : tarefasAtualizadas) {
+                modeloLista.addElement(String.format("[ID: %d] Tarefa: %s - Status: %s - Equipe: %s",
+                    tarefa.getIdTarefas(),
+                    tarefa.getNome(),
+                    tarefa.getStatus(),
+                    tarefa.getEquipe().getNomeEquipe()));
             }
-        });
-
-        dialogMembros.add(new JScrollPane(listaMembros), BorderLayout.CENTER);
-        dialogMembros.add(btnConfirmar, BorderLayout.SOUTH);
-
-        dialogMembros.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view,
+                "Erro ao atualizar lista de tarefas: " + e.getMessage(),
+                "Erro",
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
+
+    //Métodos para deletar tarefa
+    private void deletarTarefa(JList<String> listaTarefas, Long idProjeto, DefaultListModel<String> modeloLista) {
+        String tarefaSelecionada = listaTarefas.getSelectedValue();
+        if (tarefaSelecionada == null) {
+            JOptionPane.showMessageDialog(view,
+                "Por favor, selecione uma tarefa para excluir.",
+                "Aviso",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // Extrai o ID da tarefa da string selecionada
+            String idStr = tarefaSelecionada.substring(
+                tarefaSelecionada.indexOf("[ID: ") + 5,
+                tarefaSelecionada.indexOf("]")
+            );
+            Long idTarefa = Long.parseLong(idStr);
+
+            int confirmacao = JOptionPane.showConfirmDialog(view,
+                "Tem certeza que deseja excluir esta tarefa?",
+                "Confirmar Exclusão",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+
+            if (confirmacao == JOptionPane.YES_OPTION) {
+                tarefasDao.deletarTarefa(idTarefa);
+                atualizarListaTarefas(idProjeto, modeloLista);
+                JOptionPane.showMessageDialog(view,
+                    "Tarefa excluída com sucesso!",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view,
+                "Erro ao excluir tarefa: " + e.getMessage(),
+                "Erro",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
 
     // Carrega todos os projetos na tabela
     private void carregarProjetos() {
         try {
             DefaultTableModel modelo = view.getModeloTabela();
-            modelo.setRowCount(0); // Limpa a tabela antes de carregar
-            
+
             List<Projetos> projetos = projetosDao.buscarTodosProjetos();
             for (Projetos projeto : projetos) {
                 modelo.addRow(new Object[]{

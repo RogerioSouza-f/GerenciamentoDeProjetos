@@ -41,13 +41,18 @@ public class GerenciamentoEquipeController {
         List<Tarefas> tarefas = tarefasDao.buscarTarefasDaEquipe(equipe.getIdEquipe());
         
         for (Tarefas tarefa : tarefas) {
-            modelo.addRow(new Object[]{
-                tarefa.getIdTarefas(),
-                tarefa.getNome(),
-                tarefa.getDescricao(),
-                tarefa.getStatus(),
-                tarefa.getProjeto().getNome()
-            });
+            try {
+                modelo.addRow(new Object[]{
+                    tarefa.getIdTarefas(),
+                    tarefa.getNome(),
+                    tarefa.getDescricao(),
+                    tarefa.getStatus(),
+                    tarefa.getProjeto() != null ? tarefa.getProjeto().getNome() : "Sem projeto"
+                });
+            } catch (Exception e) {
+                System.out.println("Erro ao carregar tarefa: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
     
@@ -124,4 +129,5 @@ public class GerenciamentoEquipeController {
         LiderController controller = new LiderController(telaLider);
         telaLider.setVisible(true);
     }
+
 }

@@ -18,7 +18,7 @@ public class TelaMenuAdministrador extends JFrame {
         setSize(400, 450);
         setLocationRelativeTo(null);
 
-        // Painel principal com BoxLayout vertical
+        // Painel principal 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro

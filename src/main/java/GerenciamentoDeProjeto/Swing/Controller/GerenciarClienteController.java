@@ -106,7 +106,7 @@ private void criarNovoCliente() {
         }
 
         try {
-            // Obtém o ID do cliente selecionado (convertendo para long)
+
             Object idObj = view.getTabelaClientes().getValueAt(linhaSelecionada, 0);
             long idCliente;
             
@@ -143,7 +143,7 @@ private void criarNovoCliente() {
                 }
 
                 // Agora podemos excluir o cliente
-                clientesDao.deletetarCliente(idCliente);
+                clientesDao.deletarCliente(idCliente);
                 
                 // Atualiza a tabela
                 carregarClientes();

@@ -1,7 +1,6 @@
 package GerenciamentoDeProjeto.Dao;
 
 import GerenciamentoDeProjeto.Model.Projetos;
-import Persistence.Manager.PersistenceManager;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
@@ -51,22 +50,31 @@ public class ProjetosDao {
     }
 }
 
-    public void deletarProjeto(long id) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            Projetos projeto = entityManager.find(Projetos.class, id);
-            if (projeto != null) {
-                entityManager.remove(projeto);
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
+public void deletarProjeto(long id) {
+    EntityTransaction transaction = entityManager.getTransaction();
+    
+    try {
+        transaction.begin();
+
+        entityManager.createQuery(
+                "DELETE FROM Tarefas WHERE projeto.idProjeto = :projetoId")
+                .setParameter("projetoId", id)
+                .executeUpdate();
+
+        // Busca e remove o projeto
+        Projetos projeto = entityManager.find(Projetos.class, id);
+        if (projeto != null) {
+            entityManager.remove(projeto);
         }
+        
+        transaction.commit();
+    } catch (Exception e) {
+        if (transaction.isActive()) {
+            transaction.rollback();
+        }
+        throw new RuntimeException("Erro ao excluir projeto: " + e.getMessage(), e);
     }
+}
 
     public List<Projetos> buscarProjetosDoCliente(long idCliente) {
         try {

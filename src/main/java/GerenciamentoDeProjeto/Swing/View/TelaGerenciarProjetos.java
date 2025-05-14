@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class TelaGerenciarProjetos extends JFrame {
     private JTable tabelaProjetos;
-    private JButton btnNovo;
     private JButton btnEditar;
     private JButton btnExcluir;
     private JButton btnVoltar;
@@ -24,13 +23,10 @@ public class TelaGerenciarProjetos extends JFrame {
         setSize(800, 600);
         setLocationRelativeTo(null);
 
-//        // Painel principal
-//        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-//        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
         // Painel principal
-        JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro
+        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBackground(new Color(220, 220, 220));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -56,12 +52,10 @@ public class TelaGerenciarProjetos extends JFrame {
         // Painel de botões
         JPanel botoesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         
-        btnNovo = new JButton("Novo Projeto");
         btnEditar = new JButton("Editar");
         btnExcluir = new JButton("Excluir");
         btnVoltar = new JButton("Voltar");
 
-        botoesPanel.add(btnNovo);
         botoesPanel.add(btnEditar);
         botoesPanel.add(btnExcluir);
         botoesPanel.add(btnVoltar);
@@ -80,10 +74,6 @@ public class TelaGerenciarProjetos extends JFrame {
     // Getters para os componentes
     public JTable getTabelaProjetos() {
         return tabelaProjetos;
-    }
-
-    public JButton getBtnNovo() {
-        return btnNovo;
     }
 
     public JButton getBtnEditar() {

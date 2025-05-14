@@ -22,7 +22,7 @@ public class Tarefas {
     private String status = "Pendente";
 
     @ManyToOne
-    @JoinColumn(name = "id_equipe")
+    @JoinColumn(name = "idEquipe")
     private Equipe equipe;
 
 
@@ -30,17 +30,6 @@ public class Tarefas {
     @JoinColumn(nullable = false, name = "idProjeto")
     private Projetos projeto;
 
-    @ManyToMany
-    @JoinTable(name = "Tarefa_Membro")
-    private List<Membros> membros;
-
-    public List<Membros> getMembros() {
-        return membros;
-    }
-
-    public void setMembros(List<Membros> membros) {
-        this.membros = membros;
-    }
 
     public int getIdTarefas() {
         return idTarefas;

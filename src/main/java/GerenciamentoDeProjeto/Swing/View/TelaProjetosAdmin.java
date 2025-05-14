@@ -23,8 +23,7 @@ public class TelaProjetosAdmin extends JFrame {
 
         // Painel principal
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-
-        mainPanel.setBackground(new Color(220, 220, 220)); // Cinza claro
+        mainPanel.setBackground(new Color(220, 220, 220));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Painel esquerdo com lista de projetos
@@ -39,7 +38,6 @@ public class TelaProjetosAdmin extends JFrame {
         JPanel botoesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         btnNovoProjeto = new JButton("Novo Projeto");
         btnEditarProjeto = new JButton("Editar");
-        btnExcluirProjeto = new JButton("Excluir");
         
         botoesPanel.add(btnNovoProjeto);
         botoesPanel.add(btnEditarProjeto);
@@ -70,27 +68,9 @@ public class TelaProjetosAdmin extends JFrame {
     }
 
     // Getters
-    public JList<String> getListaProjetos() {
-        return listaProjetos;
-    }
 
-    public JTextArea getTxtDetalheProjeto() {
-        return txtDetalheProjeto;
-    }
 
     public JButton getBtnVoltar() {
         return btnVoltar;
-    }
-
-    public JButton getBtnNovoProjeto() {
-        return btnNovoProjeto;
-    }
-
-    public JButton getBtnEditarProjeto() {
-        return btnEditarProjeto;
-    }
-
-    public JButton getBtnExcluirProjeto() {
-        return btnExcluirProjeto;
     }
 }
